@@ -52,7 +52,7 @@ public:
      * @param keyword representing the string used to represent a text in source code to be changed
      * @return the locale-wise string from the language resources
      */
-    std::string getLanguageResource(const std::string& keyword);
+    std::string getLanguageResource(const std::string& keyword) const;
 
     /**
      * Function: changes the language of the system

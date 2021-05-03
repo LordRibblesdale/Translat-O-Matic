@@ -22,7 +22,7 @@ LanguageResource::LanguageResource(const std::string& dir, const std::string &la
     loadLanguage();
 }
 
-std::string LanguageResource::getLanguageResource(const std::string& keyword) {
+std::string LanguageResource::getLanguageResource(const std::string& keyword) const {
     return languagePhrases.at(keyword);
 }
 
