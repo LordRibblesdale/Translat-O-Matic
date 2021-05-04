@@ -16,7 +16,7 @@ class LanguageResource {
 private:
     std::string dir;
     std::string locale;
-
+    std::unordered_map<std::string, std::string> languagePhrases;
 
     /**
      * Private function: loads .properties file for language strings
@@ -24,8 +24,6 @@ private:
     void loadLanguage();
 
 public:
-    std::unordered_map<std::string, std::string> languagePhrases;
-
     /**
      * Constructor: initialises the LanguageResource class
      *
@@ -46,6 +44,42 @@ public:
      */
     LanguageResource(const std::string& dir, const std::string& language, const std::string& territory);
 
+    // TODO check if default is the optimal solution for standard variable definition
+    /**
+     * Copy constructor of LanguageResource
+     *
+     * @param languageResource: object input for copy
+     */
+    LanguageResource(const LanguageResource& languageResource) = default;
+
+    /**
+     * Move constructor of LanguageResource
+     *
+     * @param languageResource: object input for move
+     */
+    LanguageResource(LanguageResource&& languageResource) = default;
+
+    /**
+     * Destructor of LanguageResource
+     */
+    ~LanguageResource() = default;
+
+    /**
+     * Copy assignment of LanguageResource
+     *
+     * @param languageResource: object input for copy
+     * @return copied value of LanguageResource
+     */
+    LanguageResource& operator=(const LanguageResource& languageResource) = default;
+
+    /**
+     * Move assignment of LanguageResource
+     *
+     * @param languageResource: object input for move
+     * @return moved value of LanguageResource
+     */
+    LanguageResource& operator=(LanguageResource&& languageResource) = default;
+
     /**
      * Function: returns the locale-wise string used in source code, extracted from language resources files
      *
@@ -62,6 +96,8 @@ public:
      * @param territory represents the territory code for the locale parameters language_TERRITORY (ex: territory=US in en_US)
      */
     void changeLanguage(const std::string& language, const std::string& territory);
+
+
 };
 
 

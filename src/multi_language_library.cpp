@@ -79,4 +79,3 @@ void LanguageResource::loadLanguage() {
         throw LangException();
     }
 }
-
