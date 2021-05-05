@@ -79,3 +79,11 @@ void LanguageResource::loadLanguage() {
         throw LangException();
     }
 }
+
+std::string LanguageResource::getLanguage() const {
+    return locale.substr(0, 2);
+}
+
+std::string LanguageResource::getTerritory() const {
+    return locale.substr(3);
+}

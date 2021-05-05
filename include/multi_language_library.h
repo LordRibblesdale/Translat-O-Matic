@@ -97,7 +97,19 @@ public:
      */
     void changeLanguage(const std::string& language, const std::string& territory);
 
+    /**
+     * Getter function of the chosen language, in locale variable
+     *
+     * @return the language (aa) from aa_BB locale format
+     */
+    std::string getLanguage() const;
 
+    /**
+    * Getter function of the chosen territory, in locale variable
+    *
+    * @return the territory (BB) from aa_BB locale format
+    */
+    std::string getTerritory() const;
 };
 
 
