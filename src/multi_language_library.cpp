@@ -26,6 +26,12 @@ std::string LanguageResource::getLanguageResource(const std::string& keyword) co
     return languagePhrases.at(keyword);
 }
 
+void LanguageResource::forEachEntry(std::function<void(const std::string&, const std::string&)>& function) const {
+    for (auto& x : languagePhrases) {
+        function(x.first, x.second);
+    }
+}
+
 void LanguageResource::changeLanguage(const std::string &language, const std::string &territory) {
     locale = std::move(std::string(language).append("_").append(territory));
     loadLanguage();
@@ -65,7 +71,7 @@ void LanguageResource::loadLanguage() {
             }
 
             // Moving text first index to first non-space character
-            while (line.at(++eqIndex) == ' ');
+            while (line.at(++eqIndex) == ' ' || line.at(eqIndex) == '\t');
 
             // Assigning all remaining text to langText
             langText = line.substr(eqIndex);
