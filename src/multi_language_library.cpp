@@ -61,7 +61,7 @@ void LanguageResource::loadLanguage() {
 
             // Substring indices extraction
             eqIndex = line.find('=');
-            blankIndex = line.find(' ');
+            blankIndex = std::min(line.find(' '), line.find('\t'));
 
             // Space-less keyword substring
             if (blankIndex != std::string::npos && blankIndex < eqIndex) {
