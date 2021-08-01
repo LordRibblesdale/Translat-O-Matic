@@ -4,7 +4,7 @@ project(cmake_translat-o-matic)
 set(CMAKE_CXX_STANDARD 20)
 
 file(GLOB_RECURSE headers
-        "include/*.h"
+        "include/*.hpp"
 )
 file(GLOB_RECURSE sources
         "src/*.cpp"
