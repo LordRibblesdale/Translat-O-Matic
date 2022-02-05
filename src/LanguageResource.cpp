@@ -1,4 +1,4 @@
-#include "../include/multi_language_library.hpp"
+#include "../include/LanguageResource.hpp"
 
 #include <filesystem>
 #include <iostream>
@@ -11,14 +11,12 @@
  * @return the string form of Language
  */
 
-LanguageResource::LanguageResource(const std::string& dir) :
-        dir(dir), locale("en_UK") {
+LanguageResource::LanguageResource(const std::string& dir) : dir(dir) {
     loadLanguage();
 }
 
 LanguageResource::LanguageResource(const std::string& dir, const std::string &language, const std::string &territory) :
-        dir(dir) {
-    locale.append(language).append("_").append(territory);
+        dir(dir), locale(language + "_" + territory) {
     loadLanguage();
 }
 
@@ -26,9 +24,10 @@ std::string LanguageResource::getLanguageResource(const std::string& keyword) co
     return languagePhrases.at(keyword);
 }
 
-void LanguageResource::forEachEntry(std::function<void(const std::string&, const std::string&)>& function) const {
-    for (auto& x : languagePhrases) {
-        function(x.first, x.second);
+template <typename Predicate>
+void LanguageResource::forEachEntry(Predicate&& function) const {
+    for (auto& [first, second] : languagePhrases) {
+        function(first, second);
     }
 }
 
@@ -47,8 +46,13 @@ void LanguageResource::loadLanguage() {
 
     if (inputFile) {
         std::stringstream langFile;
-        std::string line, keyword, langText;
-        size_t eqIndex, blankIndex;
+
+        std::string line;
+        std::string keyword;
+        std::string langText;
+
+        size_t eqIndex;
+        size_t blankIndex;
 
         langFile << inputFile.rdbuf();
 
@@ -77,7 +81,7 @@ void LanguageResource::loadLanguage() {
             langText = line.substr(eqIndex);
 
             // Creating object into map
-            languagePhrases.emplace(keyword, langText);
+            languagePhrases.try_emplace(keyword, langText);
         }
 
         inputFile.close();

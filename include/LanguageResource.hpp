@@ -8,7 +8,7 @@
 #include <functional>
 
 class LangException : public std::exception {
-    virtual const char* what() const throw() {
+    const char* what() const noexcept final {
         return "LangException: language file not found OR not loaded";
     }
 };
@@ -16,7 +16,7 @@ class LangException : public std::exception {
 class LanguageResource {
 private:
     std::string dir;
-    std::string locale;
+    std::string locale{"EN-US"};
     std::unordered_map<std::string, std::string> languagePhrases;
 
     /**
@@ -94,9 +94,11 @@ public:
     /**
      * Function: calls a function to be called for each element of the languagePhrases elements
      *
+     * @tparam Predicate lambda template type
      * @param function lambda of the function to be called
      */
-    void forEachEntry(std::function<void(const std::string&, const std::string&)>& function) const;
+    template<typename Predicate>
+    void forEachEntry(Predicate&& function) const;
 
     /**
      * Function: changes the language of the system

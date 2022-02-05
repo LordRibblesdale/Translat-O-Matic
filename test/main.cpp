@@ -1,7 +1,7 @@
-#include "../include/multi_language_library.h"
-
 #include <iostream>
 #include <string>
+
+#include "LanguageResource.hpp"
 
 int main() {
     LanguageResource lr("languages", "en", "UK");
