@@ -1,5 +1,4 @@
-#ifndef CMAKE_TRANSLAT_O_MATIC_MULTI_LANGUAGE_LIBRARY_H
-#define CMAKE_TRANSLAT_O_MATIC_MULTI_LANGUAGE_LIBRARY_H
+#pragma once
 
 #include <string>
 #include <unordered_map>
@@ -8,6 +7,7 @@
 #include <functional>
 
 class LangException : public std::exception {
+public:
     const char* what() const noexcept final {
         return "LangException: language file not found OR not loaded";
     }
@@ -124,6 +124,3 @@ public:
     */
     std::string getTerritory() const;
 };
-
-
-#endif //CMAKE_TRANSLAT_O_MATIC_MULTI_LANGUAGE_LIBRARY_H
